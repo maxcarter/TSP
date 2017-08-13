@@ -1,3 +1,5 @@
+import math
+
 # City data obtained from:
 # https://www.infoplease.com/world/united-states-geography/latitude-and-longitude-us-and-canadian-cities
 cities = {
@@ -110,7 +112,7 @@ cities = {
     'San Juan, P.R.': (18.30, 66.10),
     'Santa Fe, N.M.': (35.41, 105.57),
     'Savannah, Ga.': (32.5, 81.5),
-    'Seattle, Wash.': (47.37,122.20),
+    'Seattle, Wash.': (47.37, 122.20),
     'Shreveport, La.': (32.28, 93.42),
     'Sioux Falls, S.D.': (43.33, 96.44),
     'Sitka, Alaska': (57.10, 135.15),
@@ -132,6 +134,31 @@ cities = {
     'Winnipeg, Man., Can.': (49.54, 97.7)
 }
 
+
 class Cities:
     def getData(self):
         return cities
+
+    def calculate_distance(a, b):
+        earth_radius = 3963
+        latitude_a, longitude_a = math.radians(a[0]), math.radians(a[1])
+        latitude_b, longitude_b = math.radians(b[0]), math.radians(b[1])
+
+        sin = math.sin(latitude_a) + math.sin(latitude_b)
+        cos = math.cos(latitude_a) + math.cos(latitude_b)
+
+        distance = math.acos(
+            sin + cos + math.cos(longitude_a - longitude_b)) * earth_radius
+
+        return distance
+
+    def generate_distance_matrix(self):
+        distance_matrix = {}
+        for k1, v1 in cities.items():
+            distance_matrix[k1] = {}
+            for k2, v2 in cities.items():
+                if k2 == k1:
+                    distance_matrix[k1][k2] = 0.0
+                else:
+                    distance_matrix[k1][k2] = self.calculate_distance(v1, v2)
+        return distance_matrix
