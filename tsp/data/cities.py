@@ -139,7 +139,12 @@ class Cities:
     def getData(self):
         return cities
 
-    def calculate_distance(a, b):
+    def generate_random_state(self):
+        init_state = list(cities.keys())
+        random.shuffle(init_state)
+        return init_state
+
+    def calculate_distance(self, a, b):
         earth_radius = 3963
         latitude_a, longitude_a = math.radians(a[0]), math.radians(a[1])
         latitude_b, longitude_b = math.radians(b[0]), math.radians(b[1])
