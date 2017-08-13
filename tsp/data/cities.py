@@ -1,4 +1,5 @@
 import math
+import random
 
 # City data obtained from:
 # https://www.infoplease.com/world/united-states-geography/latitude-and-longitude-us-and-canadian-cities
