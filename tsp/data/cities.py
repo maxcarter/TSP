@@ -150,11 +150,10 @@ class Cities:
         latitude_a, longitude_a = math.radians(a[0]), math.radians(a[1])
         latitude_b, longitude_b = math.radians(b[0]), math.radians(b[1])
 
-        sin = math.sin(latitude_a) + math.sin(latitude_b)
-        cos = math.cos(latitude_a) + math.cos(latitude_b)
+        sin = math.sin(latitude_a) * math.sin(latitude_b)
+        cos = math.cos(latitude_a) * math.cos(latitude_b)
 
-        distance = math.acos(
-            sin + cos + math.cos(longitude_a - longitude_b)) * earth_radius
+        distance = math.acos(sin + cos * math.cos(longitude_a - longitude_b)) * earth_radius
 
         return distance
 
